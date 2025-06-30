@@ -3,6 +3,7 @@ const numero2 = document.getElementById("numero2");
 const operacion = document.getElementById("operacion");
 const calcularBtn = document.getElementById("calcularBtn");
 const resultado = document.getElementById("resultado");
+const formulario = document.getElementById("formulario");
 
 function verificarDivisionPorCero() {
   if (operacion.value === "dividir" && parseFloat(numero2.value) === 0) {
@@ -15,7 +16,9 @@ function verificarDivisionPorCero() {
 numero2.addEventListener("input", verificarDivisionPorCero);
 operacion.addEventListener("change", verificarDivisionPorCero);
 
-calcularBtn.addEventListener("click", () => {
+formulario.addEventListener("submit", function(event) {
+  event.preventDefault();
+
   const n1 = parseFloat(numero1.value);
   const n2 = parseFloat(numero2.value);
   let res;
@@ -31,7 +34,7 @@ calcularBtn.addEventListener("click", () => {
       res = n1 * n2;
       break;
     case "dividir":
-      res = n1 / n2;
+      res = n2 !== 0 ? n1 / n2 : "No se puede dividir por cero";
       break;
     default:
       res = "Operación no válida";
